@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #6200ea;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #1f1f1f;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #bb86fc;
+        }
+        .description {
+            font-size: 1.1em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .anime-img {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .anime-img img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 12px;
+            width: 85%;
+            border: 2px solid #6200ea;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: #e0e0e0;
+            font-size: 1.1em;
+        }
+        select {
+            padding: 12px;
+            width: 60%;
+            border: 2px solid #6200ea;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #333;
+            color: #e0e0e0;
+            font-size: 1.1em;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #bb86fc;
+            color: #1f1f1f;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3700b3;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #222;
+            color: #888;
+            border-radius: 12px;
+        }
+        footer p {
+            font-size: 0.9em;
+        }
+
+        .warna {
+            color: red;
+            font-size: large;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🚀 YouTube Video & Audio Downloader</h1>
+        <p>Convert your YouTube videos easily into MP4 or MP3 formats!</p>
+    </div>
+
+    <div class="container">
+        <div class="description">
+            <p class="warna" >Selamat datang!<p><p> Alat ini memungkinkan Anda mengunduh video YouTube dalam format MP4 atau mengonversinya ke audio MP3 dengan cepat. Cukup tempel URL, pilih format, dan mulai mengunduh. Nikmati kemudahan dan kecepatan layanan kami.</p>
+        </div>
+
+        <!-- Anime Image -->
+        <div class="anime-img">
+            <img src="https://i.pinimg.com/originals/51/ed/e9/51ede97854c68d115c097abc3c074ddb.gif" width="450" height="300" alt="Anime Girl">
+        </div>
+
+        <!-- Form -->
+        <form action="/download" method="POST">
+            <input type="text" name="youtube_url" placeholder="Enter YouTube URL" required>
+            <br>
+            <select name="format" required>
+                <option value="mp4">Download as MP4 (Video)</option>
+                <option value="mp3">Convert to MP3 (Audio)</option>
+            </select>
+            <br>
+            <button type="submit">Download</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>Made with 💜 by ZeroX-404. Happy downloading!</p>
+    </footer>
+
+</body>
+</html>
