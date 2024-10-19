@@ -1,0 +1,27 @@
+name: YouTube Converter Workflow
+
+on:
+  push:
+    branches:
+      - main  # Atur ke branch yang kamu gunakan, biasanya main atau master
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Versi Python yang kamu inginkan
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Pastikan kamu punya file requirements.txt
+
+    - name: Run YouTube converter script
+      run: python app.py  # Ganti dengan nama file Python yang ingin dijalankan
