@@ -1,54 +1,31 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, send_from_directory, render_template
 import os
 import yt_dlp
 
 app = Flask(__name__)
+
 DOWNLOAD_FOLDER = 'downloaded_files'
-os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
-
-# Fungsi untuk download video dari YouTube
-def download_youtube_video(url, format='mp4'):
-    if format == 'mp4':
-        ydl_opts = {
-            'format': 'bestvideo+bestaudio/best',
-            'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
-        }
-    elif format == 'mp3':
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-        }
-
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-@app.route('/download', methods=['POST'])
-def download():
-    youtube_url = request.form['youtube_url']
-    format_type = request.form['format']
-
-    # Download the YouTube video based on format (mp4 or mp3)
-    download_youtube_video(youtube_url, format=format_type)
-    
-    return redirect(url_for('download_complete'))
-
-@app.route('/download_complete')
-def download_complete():
+    # Daftar file yang ada di folder downloaded_files
     files = os.listdir(DOWNLOAD_FOLDER)
-    return render_template('download_complete.html', files=files)
+    return render_template('index.html', files=files)
 
-@app.route('/downloaded_files/<filename>')
-def get_file(filename):
-    return send_from_directory(DOWNLOAD_FOLDER, filename)
+@app.route('/download/<filename>')
+def download_file(filename):
+    return send_from_directory(DOWNLOAD_FOLDER, filename, as_attachment=True)
+
+def convert_video(url, format):
+    # Contoh konversi menggunakan yt-dlp
+    ydl_opts = {
+        'format': format,
+        'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Buat folder jika tidak ada
+    os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
+    app.run(host='0.0.0.0', port=5000)  # Jalankan di semua alamat IP pada port 5000
