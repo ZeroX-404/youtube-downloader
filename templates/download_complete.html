@@ -42,9 +42,9 @@
         <h1>Download Completed!</h1>
         <p>Your video or audio has been downloaded successfully.</p>
         <ul>
-            {% for file in files %}
-                <li><a href="{{ url_for('get_file', filename=file) }}">{{ file }}</a></li>
-            {% endfor %}
+           {% for file in files %}
+            <li><a href="/download/{{ file }}">{{ file }}</a></li>
+        {% endfor %}
         </ul>
         <a href="/">Back to Home</a>
     </div>
